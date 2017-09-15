@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>TVWS Planning Tool</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<link rel="stylesheet" href="../config/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../config/css/custom.css"/>
+<link rel="icon" type="image/png" href="../config/images/antenna.png"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+function show_simulation()
+{
+    document.getElementById("simulation_area").style.display = "block";
+}
+
+function show_format()
+{
+    console.log("called");
+    var h = $(window).height(),
+    offsetTop = 35;
+
+    $("#leftbar").css("height", (h - offsetTop));
+
+    if (document.getElementById("file_upload").checked)
+    {
+        document.getElementById("ifYes").style.display = "block";
+        document.getElementById("upload_area").style.display = "block";
+    }
+
+    else
+        document.getElementById("ifYes").style.display = "none";
+}
+
+function hide_format()
+{
+    if (document.getElementById("simulation").checked)
+    {
+        document.getElementById("ifYes").style.display = "none";
+        document.getElementById("upload_area").style.display = "none";
+    }
+
+    else
+        document.getElementById("ifYes").style.display = "none";
+}
+
+function show_metric()
+{
+    if (document.getElementById("coverage").checked)
+    {
+        document.getElementById("coverage").style.display = "block";
+    }
+
+    else if (document.getElementById("population").checked)
+    {
+        document.getElementById("population").style.display = "block";
+    }
+
+    else if (document.getElementById("weighted_utility").checked)
+    {
+        document.getElementById("weighted_utility").style.display = "block";
+    }
+}
+
+</script>
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-static-top">
+<div class="container-fluid">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="icon-bar"></span>
+</button>
+<img src="../config/images/header.png" alt="HTML5 Icon" width="330" height="38"> <a class="navbar-brand" href="client.html"/><font color="black"><b></b></font></a>
+<img src="../config/images/logo.gif" alt="HTML5 Icon" width="50" height="50"> <a class="navbar-brand" href="client.html"/><font color="black"><b></b></font></a>
+<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thane Model</b>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-right">
+<li><a href="../London/client.html">London Model</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="readme.html">Readme</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<form action="server.php" method="post" autocomplete="off" enctype="multipart/form-data">
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-4">
+<div class="well" id="leftbar">
+<script type="text/javascript">
+    var h = $(window).height(),
+    offsetTop = 105;
+    $("#leftbar").css("height", (h - offsetTop));
+</script>
+<h4>
+Select Base Station Information
+</h4>
+
+<div class="row">
+<ul>
+<input type="radio" onclick="javascript:show_format();" name="choice" id="file_upload" value="file_upload" onclick="show_upload();">&nbsp;Import Raw Data&nbsp;
+<input type="radio" onclick="javascript:hide_format();" name="choice" id="simulation" value="simulation" onclick="show_simulation();"> Auto Pick Input Locations&nbsp;
+</ul>
+</div>
+
+<div class="row" id="ifYes" style="display: none">
+<ul>
+<span>Format of Raw Data</span>
+<br>
+<img id="test2" src="../config/images/sample_data_thane.png"/>
+<br>
+<br>
+Select .csv file to upload
+<input type="file" name="upload" id="upload">
+<div id="upload_area" style="display: none;"></div>
+</ul>
+</div>
+
+<h4>
+Select Metric of Measurement
+</h4>
+
+<div class="row">
+<ul>
+<input type="radio" name="radio_choice" id="coverage" value="Coverage_Area">&nbsp;Coverage&nbsp;
+<input type="radio" name="radio_choice" id="population" value="Population">&nbsp;Population&nbsp;
+<input type="radio" name="radio_choice" id="weighted_utility" value="Weighted_Utility"> Weighted Utility&nbsp;
+</ul>
+</div>
+
+<h4>
+Select Propagation Model
+</h4>
+
+<div class="row">
+<ul>
+<select name="propagation_model">
+    <option value="Hata">Hata</option>
+    <option value="Egli">Egli</option>
+    <option value="Free_Space">Free_Space</option>
+    <option value="Plane_Earth">Plane_Earth</option>
+</select>
+</ul>
+</div>
+
+<h4>Enter Theoretical Model Parameters
+</h4>
+
+<div class="row">
+<ul>
+Receiver Sensitivity (dBm)&nbsp;&nbsp;&nbsp;&nbsp;
+<label>
+<input class="form-control" id="text_search" name="rx_sensitivity" placeholder="Receiver Sensitivity (dBm)" type="text" value="-96" style="text-align: center; width: 50px; height: 25px" />
+</label>
+</ul>
+</div>
+
+<div class="row">
+<ul>
+Transmit Power (dBm)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>
+<input class="form-control" id="text_search" name="transmit_power" placeholder="Transmit Power (dBm)" type="text" value="36" style="text-align: center; width: 50px; height: 25px" />
+</label>
+</ul>
+</div>
+
+<div class="row">
+<ul>
+TVWS Frequency (MHz)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>
+<input class="form-control" id="text_search" name="frequency" placeholder="Frequency(MHz)" type="text" value="470" style="text-align: center; width: 50px; height: 25px" />
+</label>
+</ul>
+</div>
+
+<div class="row">
+<ul>
+Channel Width (MHz)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>
+<input class="form-control" id="text_search" name="width" placeholder="Width(MHz)" type="text" value="8" style="text-align: center; width: 50px; height: 25px" />
+</label>
+</ul>
+</div>
+
+<input type="submit" name="submit" value="Run Theoretical Model" id="submit" />
+<br><br>
+</div>
+</div>
+<div class="col-md-8">
+<noscript>
+<div class="alert alert-info">
+    <h4>Your JavaScript is disabled</h4>
+    <p>Please enable JavaScript to view the map.</p>
+</div>
+</noscript>
+<div id="map_canvas"></div>
+<p class="pull-right"></p>
+</div>
+</div>
+</div>
+</form>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYAs2t-jI3LW9wPRCa7PAc0lpPIng_R68"></script>
+<script type="text/javascript" src="../config/js/jquery.address.js"></script>
+<script type="text/javascript" src="../config/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../config/js/maps_lib.js"></script>
+<script type="text/javascript">
+
+$(window).resize(function () {
+    var h = $(window).height(),
+    offsetTop = 105;
+    $("#map_canvas").css("height", (h - offsetTop));
+}).resize();
+
+$(function() {
+    var myMap = new MapsLib({
+    fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
+    googleApiKey:       "AIzaSyA3FQFrNr5W2OEVmuENqhb2MBB2JabdaOY",
+    locationColumn:     "geometry",
+    map_center:         [19.2183, 72.9781],
+    locationScope:      "india"
+    });
+});
+</script>
+
+</body>
+</html>
