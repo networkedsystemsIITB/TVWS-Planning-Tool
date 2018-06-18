@@ -27,9 +27,7 @@ The graphical tool for TV white space deployment has the following options:
 When the user executes the theoretical model, the locations at which the TVWS antennas should be setup are displayed. On hovering over the antenna markers, one can observe all the information related to the antenna site such as latitude, longitude, altitude, coverage radius, users served, and the weighted average throughput of the antenna deployment.
 
 ## About
-This tool is the outcome of ongoing EU-India REACH project in CSE department at IIT Bombay. It can be used by researchers and network engineers to plan the deployment of TV white space antennas. Presently, the tool models two varied geographies: Thane (India) and London (UK), characterized by rural and urban demography respectively. 
-
-The research related to this project has been accepted as a full paper at CROWNCOM 2017. 
+This tool is the outcome of ongoing EU-India REACH project in CSE department at IIT Bombay. It can be used by researchers and network engineers to plan the deployment of TV white space antennas. The tool models Thane (India) district, which is characterized by rural demography. 
 
 **Contacts:**
 <br/>Mahesh Iyer
